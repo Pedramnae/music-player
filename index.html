@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>music player</title>
+    <link rel="stylesheet" href="stylesheet/master.css">
+    <link rel="stylesheet" href="font/bootstrap-icons.css">
+</head>
+<body>
+    <main>
+        <div>
+            <img id="background" src="img/1.jpg" alt="">
+            <div>
+                <figure>
+                    <img id="background2" src="img/1.jpg" alt="">
+                </figure>
+                <div>
+                    <span>
+                        <span>
+                            <p id="currentTimemin">0</p>
+                            <p id="currentTimesec">:0</p>
+                        </span>
+                        <input type="range" max="0" value="0" id="prog">
+                        <div>
+                            <p id="maxtime">0:00</p>
+                        </div>
+                    </span>
+                    <div>
+                        <div id="prev"><i class="bi bi-rewind-circle"></i></div>
+                        <div id="play"><i class="bi bi-play-circle"></i></div>
+                        <div id="pause"><i class="bi bi-pause-circle"></i></div>
+                        <div id="next"><i class="bi bi-fast-forward-circle"></i></div>
+                    </div>
+                </div>
+            </div>
+            <audio data-song="gheble" id="gheble">
+                <source src="songs/06 Ghebleh.mp3">
+            </audio>
+            <audio data-song="setarehaye-sorbi" id="setarehaye-sorbi">
+                <source src="songs/1619085367_L2oU3.mp3">
+            </audio>
+            <audio data-song="adat" id="adat">
+                <source src="songs/07 Aadat.mp3">
+            </audio>
+            <audio data-song="pooste-shir" id="pooste-shir">
+                <source src="songs/Ebi - Pooste Shir.mp3">
+            </audio>
+            <audio data-song="negaranet-misham" id="negaranet-misham">
+                <source src="songs/Ebi - Negaranet Misham.mp3">
+            </audio>
+            <audio data-song="hezaro-yek-shab" id="hezaro-yek-shab">
+                <source src="songs/Ebi - Hezaro Yek Shab.mp3">
+            </audio>
+            <audio data-song="gerye-nakon" id="gerye-nakon">
+                <source src="songs/Ebi - Gerye Nakon.mp3">
+            </audio>
+            <audio data-song="ki-ashkato-pak-mikone" id="ki-ashkato-pak-mikone">
+                <source src="songs/Ebi - Ki Ashkato Pak Mikone [320].mp3">
+            </audio>
+            <!-- left div -->
+            <!-- left div -->
+            <!-- left div -->
+            <!-- left div -->
+            <div>
+                <div>
+                    <figure>
+                        <img src="img/1.jpg" alt="">
+                        <div>
+                            <h2>EBI</h2>
+                            <p>gheble</p>
+                        </div>
+                    </figure>
+                    <figure>
+                        <img src="img/2.jpg" alt="">
+                        <div>
+                            <h2>EBI</h2>
+                            <p>setarehaye-sorbi</p>
+                        </div>
+                    </figure>
+                    <figure>
+                        <img src="img/3.jpg" alt="">
+                        <div>
+                            <h2>EBI</h2>
+                            <p>adat</p>
+                        </div>
+                    </figure>
+                    <figure>
+                        <img src="img/4.jpg" alt="">
+                        <div>
+                            <h2>EBI</h2>
+                            <p>pooste-shir</p>
+                        </div>
+                    </figure>
+                    <figure>
+                        <img src="img/5.jpg" alt="">
+                        <div>
+                            <h2>EBI</h2>
+                            <p>negaranet-misham</p>
+                        </div>
+                    </figure>
+                    <figure>
+                        <img src="img/6.jpg" alt="">
+                        <div>
+                            <h2>EBI</h2>
+                            <p>hezaro-yek-shab</p>
+                        </div>
+                    </figure>
+                    <figure>
+                        <img src="img/7.jpg" alt="">
+                        <div>
+                            <h2>EBI</h2>
+                            <p>gerye-nakon</p>
+                        </div>
+                    </figure>
+                    <figure>
+                        <img src="img/8.jpg" alt="">
+                        <div>
+                            <h2>EBI</h2>
+                            <p>ki-ashkato-pak-mikone</p>
+                        </div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    let a = ''
+    let b = ''
+    let c = ''
+    let d = ''
+    let x = ''
+    let y = ''
+    let z = ''
+    let bar = ''
+    let bar2 = ''
+    let curcaller = ''
+    let song = ''
+    let cur2 = ''
+    let pic = ''
+    let countmin2 = 0
+    let countsec2 = 0
+    let countsec = 0
+    let countmin = 0
+    let prog = document.getElementById('prog')
+    let play = document.getElementById('play')
+    let pause = document.getElementById('pause')
+    let audio = document.querySelectorAll('main>div>audio')
+    let p = document.querySelectorAll('main>div>div:nth-of-type(2)>div>figure>div>p')
+    let figure = document.querySelectorAll('main>div>div:nth-of-type(2)>div>figure')
+    audio.forEach((val) => {
+        val.addEventListener('loadedmetadata', () => {
+            val.setAttribute('data-duration', Math.floor(val.duration))
+        })
+    })
+    p.forEach((val) => {
+        name = val.innerHTML
+        val.parentElement.parentElement.setAttribute('data-name', name)
+        val.parentElement.previousElementSibling.setAttribute('data-imgname', name)
+    })
+    figure.forEach((val) => {
+        val.addEventListener('click', () => {
+            figure.forEach((val) => {
+                val.classList.remove('border')
+            })
+            document.getElementById('currentTimesec').innerHTML = ':0'
+            document.getElementById('currentTimemin').innerHTML = '0'
+            clearInterval(curcaller)
+            clearInterval(bar)
+            clearInterval(bar2)
+            clearInterval(cur2)
+            val.classList.add('border')
+            y = val.childNodes[1].getAttribute('src')
+            x = val.getAttribute('data-name')
+            document.getElementById('background').setAttribute('src', y)
+            document.getElementById('background2').setAttribute('src', y)
+            audio.forEach((val) => {
+                if ((val.getAttribute('data-song')) == x) {
+                    val.play()
+                    console.log(val);
+                    pause.style.display = 'flex'
+                    play.style.display = 'none'
+                    let min = Math.floor(val.getAttribute('data-duration') / 60)
+                    let sec = Math.floor(val.duration) - (min * 60)
+                    document.getElementById('maxtime').innerHTML = min + ':' + sec
+                    prog.max = Math.floor(val.getAttribute('data-duration'))
+                    // change prog
+                    // change prog
+                    // change prog
+                    // change prog
+                    // change prog
+                    // change prog
+                    prog.addEventListener('change', () => {
+                        document.getElementById('currentTimesec').innerHTML = ':0'
+                        document.getElementById('currentTimemin').innerHTML = '0'
+                        clearInterval(cur2)
+                        clearInterval(bar2)
+                        val.currentTime = Math.floor(prog.value)
+                        console.log(prog.value);
+                        cur2 = setInterval(() => {
+                            curtime(val.duration, Math.floor(val.currentTime))
+                        }, 1000);
+                    })
+                    // click next
+                    // click next
+                    // click next
+                    // click next
+                    // click next
+                    // click next
+                    document.getElementById('next').addEventListener('click', () => {
+                        play.style.display = 'none'
+                        pause.style.display = 'flex'
+                        clearInterval(cur2)
+                        clearInterval(curcaller)
+                        document.getElementById('currentTimesec').innerHTML = ':0'
+                        document.getElementById('currentTimemin').innerHTML = '0'
+                        val.pause()
+                        val.currentTime = 0
+                        val = val.nextElementSibling
+                        prog.max = Math.floor(val.getAttribute('data-duration'))
+                        song = val.getAttribute('data-song')
+                        for (let i = 0; i <= figure.length; i++) {
+                            if (document.getElementsByTagName('figure')[i].getAttribute('data-name') == song) {
+                                document.getElementsByTagName('figure')[i].classList.add('border');
+                            }
+                            else {
+                                document.getElementsByTagName('figure')[i].classList.remove('border');
+                            }
+                        }
+                        min = Math.floor(val.getAttribute('data-duration') / 60)
+                        sec = Math.floor(val.duration) - (min * 60)
+                        document.getElementById('maxtime').innerHTML = min + ':' + sec
+                        curcaller = setInterval(() => {
+                            curtime((Math.floor(val.getAttribute('data-duration'))), Math.floor(val.currentTime))
+                        }, 1000);
+                        clearInterval(bar2)
+                        pic = val.getAttribute('data-song')
+                        figure.forEach((val) => {
+                            if (val.getAttribute('data-name') == pic) {
+                                let src = val.childNodes[1].getAttribute('src')
+                                document.getElementById('background').setAttribute('src', src)
+                                document.getElementById('background2').setAttribute('src', src)
+                            }
+                        })
+                        figure.forEach((val) => {
+                            b = val.childNodes[1].getAttribute('src')
+                            c = document.getElementById('background').getAttribute('src')
+                            a = val.getAttribute('data-name')
+                            if (b == c) {
+                                player3(a)
+                            }
+                        })
+                        function player3(a) {
+                            if (val.getAttribute('data-song') == a) {
+                                console.log(a);
+                                console.log(val);
+                                val.play()
+                            } else {
+                                val.pause()
+                                val.currentTime = 0
+                            }
+                        }
+                    })
+                    // click prev
+                    // click prev
+                    // click prev
+                    // click prev
+                    // click prev
+                    // click prev
+                    // click prev
+                    document.getElementById('prev').addEventListener('click', () => {
+                        play.style.display = 'none'
+                        pause.style.display = 'flex'
+                        clearInterval(curcaller)
+                        clearInterval(cur2)
+                        document.getElementById('currentTimesec').innerHTML = ':0'
+                        document.getElementById('currentTimemin').innerHTML = '0'
+                        val.pause()
+                        val.currentTime = 0
+                        val = val.previousElementSibling
+                        prog.max = Math.floor(val.getAttribute('data-duration'))
+                        song = val.getAttribute('data-song')
+                        for (let i = 0; i <= figure.length; i++) {
+                            if (document.getElementsByTagName('figure')[i].getAttribute('data-name') == song) {
+                                document.getElementsByTagName('figure')[i].classList.add('border');
+                            }
+                            else {
+                                document.getElementsByTagName('figure')[i].classList.remove('border');
+                            }
+                        }
+                        min = Math.floor(val.getAttribute('data-duration') / 60)
+                        sec = Math.floor(val.duration) - (min * 60)
+                        document.getElementById('maxtime').innerHTML = min + ':' + sec
+                        curcaller = setInterval(() => {
+                            curtime((Math.floor(val.getAttribute('data-duration'))), Math.floor(val.currentTime))
+                        }, 1000);
+                        clearInterval(bar2)
+                        pic = val.getAttribute('data-song')
+                        figure.forEach((val) => {
+                            if (val.getAttribute('data-name') == pic) {
+                                let src = val.childNodes[1].getAttribute('src')
+                                document.getElementById('background').setAttribute('src', src)
+                                document.getElementById('background2').setAttribute('src', src)
+                            }
+                        })
+                        figure.forEach((val) => {
+                            b = val.childNodes[1].getAttribute('src')
+                            c = document.getElementById('background').getAttribute('src')
+                            a = val.getAttribute('data-name')
+                            if (b == c) {
+                                player2(a)
+                            }
+                        })
+                        function player2(a) {
+                            if (val.getAttribute('data-song') == a) {
+                                val.play()
+                            } else {
+                                val.pause()
+                                val.currentTime = 0
+                            }
+                        }
+                    })
+                    // value prog
+                    // value prog
+                    // value prog
+                    // value prog
+                    // value prog
+                    // value prog
+                    bar = setInterval(() => {
+                        prog.value = Math.floor(val.currentTime)
+                    }, 1000);
+                    // time 
+                    // time 
+                    // time 
+                    // time 
+                    // time 
+                    // time 
+                    bar2 = setInterval(() => {
+                        curtime(val.getAttribute('data-duration'), Math.floor(val.currentTime))
+                    }, 1000);
+                    // pause
+                    // pause
+                    // pause
+                    // pause
+                    // pause
+                    pause.addEventListener('click', () => {
+                        val.pause()
+                        pause.style.display = 'none'
+                        play.style.display = 'flex'
+                    })
+                    // play
+                    // play
+                    // play
+                    // play
+                    // play
+                    // play
+                    play.addEventListener('click', () => {
+                        figure.forEach((val) => {
+                            a = val.getAttribute('data-name')
+                            b = val.childNodes[1].getAttribute('src')
+                            c = document.getElementById('background').getAttribute('src')
+                            if (b == c) {
+                                player(a)
+                            }
+                        })
+                        function player(a) {
+                            if (val.getAttribute('data-song') == a) {
+                                val.play()
+                            }
+                        }
+                        play.style.display = 'none'
+                        pause.style.display = 'flex'
+                    })
+                }
+                else {
+                    val.pause()
+                    val.currentTime = 0
+                }
+            })
+        })
+    })
+    play.addEventListener('click', () => {
+        play.style.display = 'none'
+        pause.style.display = 'flex'
+    })
+    pause.style.display = 'none'
+    pause.addEventListener('click', () => {
+        pause.style.display = 'none'
+        play.style.display = 'flex'
+    })
+    function curtime(dur, cur) {
+        countsec = 0
+        countsec = cur
+        if (countsec <= dur) {
+            if (countsec < 60) {
+                countsec++
+                document.getElementById('currentTimesec').innerText = ':' + countsec
+            }
+            else if (countsec >= 60 && countsec <= 120) {
+                countsec++
+                countmin = 1
+                document.getElementById('currentTimemin').innerText = countmin
+                document.getElementById('currentTimesec').innerText = ':' + (countsec - 60)
+            }
+            else if (countsec >= 121 && countsec <= 180) {
+                countsec++
+                countmin = 2
+                document.getElementById('currentTimemin').innerText = countmin
+                document.getElementById('currentTimesec').innerText = ':' + (countsec - 120)
+            }
+            else if (countsec >= 181 && countsec <= 240) {
+                countsec++
+                countmin = 3
+                document.getElementById('currentTimemin').innerText = countmin
+                document.getElementById('currentTimesec').innerText = ':' + (countsec - 180)
+            }
+            else if (countsec >= 241 && countsec <= 300) {
+                countsec++
+                countmin = 4
+                document.getElementById('currentTimemin').innerText = countmin
+                document.getElementById('currentTimesec').innerText = ':' + (countsec - 240)
+            }
+            else if (countsec >= 301 && countsec <= 360) {
+                countsec++
+                countmin = 5
+                document.getElementById('currentTimemin').innerText = countmin
+                document.getElementById('currentTimesec').innerText = ':' + (countsec - 300)
+            }
+        }
+    }
+
+    function curtime2(cur, dur) {
+        countsec2 = 0
+        countsec2 = cur
+        if (countsec2 <= dur) {
+            if (countsec2 < 60) {
+                countsec2++
+                document.getElementById('currentTimesec').innerText = ':' + countsec2
+            }
+            else if (countsec2 >= 60 && countsec2 <= 120) {
+                countsec2++
+                countmin2 = 1
+                document.getElementById('currentTimemin').innerText = countmin2
+                document.getElementById('currentTimesec').innerText = ':' + (countsec2 - 60)
+            }
+            else if (countsec2 >= 121 && countsec2 <= 180) {
+                countsec2++
+                countmin2 = 2
+                document.getElementById('currentTimemin').innerText = countmin2
+                document.getElementById('currentTimesec').innerText = ':' + (countsec2 - 120)
+            }
+            else if (countsec2 >= 181 && countsec2 <= 240) {
+                countsec2++
+                countmin2 = 3
+                document.getElementById('currentTimemin').innerText = countmin2
+                document.getElementById('currentTimesec').innerText = ':' + (countsec2 - 180)
+            }
+            else if (countsec2 >= 241 && countsec2 <= 300) {
+                countsec2++
+                countmin2 = 4
+                document.getElementById('currentTimemin').innerText = countmin2
+                document.getElementById('currentTimesec').innerText = ':' + (countsec2 - 240)
+            }
+            else if (countsec2 >= 301 && countsec2 <= 360) {
+                countsec2++
+                countmin2 = 5
+                document.getElementById('currentTimemin').innerText = countmin2
+                document.getElementById('currentTimesec').innerText = ':' + (countsec2 - 300)
+            }
+        }
+    }
+</script>
+
+</html>

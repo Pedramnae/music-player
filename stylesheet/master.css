@@ -1,0 +1,217 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body > main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body > main > div {
+  width: 55%;
+  height: 65%;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+body > main > div > img {
+  position: absolute;
+  top: 0;
+  height: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(30px);
+  mix-blend-mode: multiply;
+}
+body > main > div > div:nth-of-type(1) {
+  width: 72%;
+  height: 95%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+body > main > div > div:nth-of-type(1) > figure {
+  width: 95%;
+  height: 70%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+body > main > div > div:nth-of-type(1) > figure > img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+body > main > div > div:nth-of-type(1) > div {
+  width: 95%;
+  height: 20%;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+body > main > div > div:nth-of-type(1) > div > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+}
+body > main > div > div:nth-of-type(1) > div > span > span {
+  width: 10%;
+  display: flex;
+}
+body > main > div > div:nth-of-type(1) > div > span > span > p {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+body > main > div > div:nth-of-type(1) > div > span > span > p:nth-of-type(1) {
+  justify-content: end;
+}
+body > main > div > div:nth-of-type(1) > div > span > span > p:nth-of-type(2) {
+  justify-content: start;
+}
+body > main > div > div:nth-of-type(1) > div > span > div {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body > main > div > div:nth-of-type(1) > div > span > div > p {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14px;
+  color: white;
+}
+body > main > div > div:nth-of-type(1) > div > span > #prog {
+  width: 75%;
+  height: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+body > main > div > div:nth-of-type(1) > div > div {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+body > main > div > div:nth-of-type(1) > div > div > div {
+  width: 32%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body > main > div > div:nth-of-type(1) > div > div > div > i {
+  font-size: 30px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+body > main > div > div:nth-of-type(2) {
+  width: 22%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  margin-left: 15px;
+  z-index: 10;
+  overflow: hidden;
+}
+body > main > div > div:nth-of-type(2) > div {
+  width: calc(100% + 20px);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  max-height: 450px;
+}
+body > main > div > div:nth-of-type(2) > div > figure {
+  width: 90%;
+  height: 80px;
+  border-radius: 15px;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px 0px;
+  cursor: pointer;
+}
+body > main > div > div:nth-of-type(2) > div > figure:hover > img {
+  filter: blur(2px);
+  mix-blend-mode: multiply;
+}
+body > main > div > div:nth-of-type(2) > div > figure > img {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: 0.4s;
+}
+body > main > div > div:nth-of-type(2) > div > figure > div {
+  width: 95%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+body > main > div > div:nth-of-type(2) > div > figure > div > * {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  color: gray;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+body > main > div > div:nth-of-type(2) > div > figure > div > h2 {
+  font-size: 14px;
+  font-weight: bold;
+}
+body > main > div > div:nth-of-type(2) > div > figure > div > p {
+  text-transform: capitalize;
+  font-size: 12px;
+}
+
+.flex {
+  display: flex;
+}
+
+.none {
+  display: none;
+}
+
+#prog::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: gray;
+  border: 2px solid white;
+}
+
+.border {
+  border: 4px solid gray;
+}/*# sourceMappingURL=master.css.map */
